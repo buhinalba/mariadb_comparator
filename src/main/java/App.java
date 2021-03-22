@@ -67,7 +67,12 @@ public class App {
 
 
     private void checkForNewTables() {
-        // todo go through tables of schema2 - check if in schema1
+        newTables = new ArrayList<>();
+        for (Table table: schema2.getTables()) {
+            if (schema1.getTable(table.getName()).isEmpty()) {
+                newTables.add(table);
+            }
+        }
     }
 
 
