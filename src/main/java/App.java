@@ -88,7 +88,13 @@ public class App {
 
 
     private void checkForNewColumns(Table oldTable, Table newTable) {
-        // todo go through commonTables
+        newColumns = new ArrayList<>();
+        for (Column column: newTable.getColumns()) {
+            Optional<Column> newTableColumn = oldTable.getColumn(column.getName());
+            if (newTableColumn.isEmpty()) {
+                newColumns.add(column);
+            }
+        }
     }
 
 
