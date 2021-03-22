@@ -19,14 +19,12 @@ public class App {
     List<Map.Entry<Column, Column>> alteredColumns;
 
     public void compareSchemas() {
-        /* CHECK FOR:
-            - deleted tables
-            - new tables
-
-            - deleted columns
-            - new columns
-            - altered columns (type changed)
-         */
+        // thought: factor methods out to SchemaComparator class ?
+        checkForDeletedTables();
+        checkForNewTables();
+        checkForDeletedColumns();
+        checkForNewColumns();
+        checkForDeletedColumns();
     }
 
 
@@ -55,7 +53,9 @@ public class App {
 
     private void checkForDeletedTables() {
         // todo go through tables of schema1 - check if in schema2
-        // question -> could a value like 'is_common' in Schema help? -> No need to look for it in the other schema if it is already marked as common
+
+
+        // thought: could a value like 'is_common' in Schema help? -> No need to look for it in the other schema if it is already marked as common
     }
 
 

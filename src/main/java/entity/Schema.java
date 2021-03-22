@@ -1,9 +1,10 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Schema {
-    private String name;
+    private final String name;
     private ArrayList<Table> tables;
 
     public Schema(String name) {
@@ -11,8 +12,8 @@ public class Schema {
         this.tables = new ArrayList<>();
     }
 
-    public Table getTable(String name) {
-        return null;
+    public Optional<Table> getTable(String name) {
+        return tables.stream().filter(table -> table.getName().equals(name)).findFirst();
     }
 
     public String getName() {
