@@ -15,4 +15,11 @@ public class Schema {
         return null;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<Table> getTables() {
+        return tables;
+    }
 }
