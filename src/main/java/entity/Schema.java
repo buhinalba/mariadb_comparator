@@ -22,4 +22,8 @@ public class Schema {
     public ArrayList<Table> getTables() {
         return tables;
     }
+
+    public void setTables(ArrayList<Table> tables) {
+        this.tables = tables;
+    }
 }
