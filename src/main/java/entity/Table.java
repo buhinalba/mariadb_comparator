@@ -1,6 +1,7 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Table {
     private String name;
@@ -27,5 +28,9 @@ public class Table {
 
     public String getSchemaName() {
         return schemaName;
+    }
+
+    public Optional<Column> getColumn(String name) {
+        return columns.stream().filter(column -> column.getName().equals(name)).findFirst();
     }
 }

@@ -61,7 +61,6 @@ public class App {
             } else {
                 checkForDeletedColumns(table, schema2Table.get());
                 checkForNewColumns(table, schema2Table.get());
-                checkForAlteredColumns(table, schema2Table.get());
                 commonTables.add(table);
             }
         }
@@ -80,6 +79,14 @@ public class App {
 
     private void checkForDeletedColumns(Table oldTable, Table newTable) {
         deletedColumns = new ArrayList<>();
+        for (Column column: oldTable.getColumns()) {
+            Optional<Column> newTableColumn = newTable.getColumn(column.getName());
+            if (newTableColumn.isEmpty()) {
+                deletedColumns.add(column);
+            } else {
+                checkForColumnAlteration(column, newTableColumn.get());
+            }
+        }
     }
 
 
@@ -88,7 +95,9 @@ public class App {
     }
 
 
-    private void checkForAlteredColumns(Table oldTable, Table newTable) {
-        // todo go through commonTables
+    private void checkForColumnAlteration(Column oldTable, Column newTable) {
+        if (!oldTable.getType().equals(newTable.getType())) {
+            // alteredColumns.add();
+        }
     }
 }
