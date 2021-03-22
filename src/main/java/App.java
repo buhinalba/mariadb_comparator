@@ -3,10 +3,7 @@ import entity.Schema;
 import entity.Table;
 import jdbc.DatabaseReader;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class App {
     private final Schema schema1;
@@ -18,7 +15,7 @@ public class App {
     private List<Table> commonTables;
     private List<Column> deletedColumns;
     private List<Column> newColumns;
-    private List<Map.Entry<Column, Column>> alteredColumns;
+    private HashMap<Column, Column> alteredColumns;
 
     public void compareSchemas() {
         // thought: factor methods out to SchemaComparator class ?
@@ -95,9 +92,9 @@ public class App {
     }
 
 
-    private void checkForColumnAlteration(Column oldTable, Column newTable) {
-        if (!oldTable.getType().equals(newTable.getType())) {
-            // alteredColumns.add();
+    private void checkForColumnAlteration(Column oldColumn, Column newColumn) {
+        if (!oldColumn.getType().equals(newColumn.getType())) {
+            alteredColumns.put(oldColumn, newColumn);
         }
     }
 }
