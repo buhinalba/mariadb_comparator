@@ -3,6 +3,7 @@ import entity.Schema;
 import entity.Table;
 import jdbc.DatabaseReader;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,12 +12,12 @@ public class App {
     private final Schema schema2;
     DatabaseReader dbReader;
 
-    List<Table> deletedTables;
-    List<Table> newTables;
-    List<Table> commonTables;
-    List<Column> deletedColumns;
-    List<Column> newColumns;
-    List<Map.Entry<Column, Column>> alteredColumns;
+    private List<Table> deletedTables;
+    private List<Table> newTables;
+    private List<Table> commonTables;
+    private List<Column> deletedColumns;
+    private List<Column> newColumns;
+    private List<Map.Entry<Column, Column>> alteredColumns;
 
     public void compareSchemas() {
         // thought: factor methods out to SchemaComparator class ?
@@ -52,6 +53,9 @@ public class App {
 
 
     private void checkForDeletedTables() {
+        deletedTables = new ArrayList<>();
+        commonTables = new ArrayList<>();
+
         for (Table table: schema1.getTables()) {
             if (schema2.getTable(table.getName()).isEmpty()) {
                 deletedTables.add(table);
