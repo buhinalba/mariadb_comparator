@@ -52,10 +52,13 @@ public class App {
 
 
     private void checkForDeletedTables() {
-        // todo go through tables of schema1 - check if in schema2
-
-
-        // thought: could a value like 'is_common' in Schema help? -> No need to look for it in the other schema if it is already marked as common
+        for (Table table: schema1.getTables()) {
+            if (schema2.getTable(table.getName()).isEmpty()) {
+                deletedTables.add(table);
+            } else {
+                commonTables.add(table);
+            }
+        }
     }
 
 
