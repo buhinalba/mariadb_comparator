@@ -13,11 +13,14 @@ import java.util.ArrayList;
 public class MariaDbReader implements DatabaseReader {
     DatabaseManager databaseManager;
 
+    public MariaDbReader(DatabaseManager databaseManager) {
+        this.databaseManager = databaseManager;
+    }
 
     @Override
-    public ArrayList<Table> importTables(Schema schema) {
+    public boolean importTables(Schema schema) {
         try {
-            Connection conn = databaseManager.getConnection();
+            Connection conn = databaseManager.getConnection(schema.getName());
             String query = "SELECT table_name FROM information_schema.tables WHERE table_type = 'base table' AND table_schema=?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, schema.getName());
@@ -27,7 +30,7 @@ public class MariaDbReader implements DatabaseReader {
             ArrayList<Table> tables = new ArrayList<>();
             while (rs.next()) {
                 System.out.println(rs.getString(1));
-                tables.add(new Table(rs.getString(1)));
+                tables.add(new Table(rs.getString(1), schema.getName()));
             }
             conn.close();
             for (Table table: tables) {
@@ -35,39 +38,34 @@ public class MariaDbReader implements DatabaseReader {
             }
             schema.setTables(tables);
 
-            return tables; // todo question -> is this necessary?? a boolean return could indicate if the import worked successfully or not
+            return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            throw new RuntimeException(e.getMessage());
+            return false;
         }
     }
 
-    public MariaDbReader() {
-        this.databaseManager = new DatabaseManager();   // todo dependency injection
-    }
 
-    private ArrayList<Column> importColumns(Table table) throws SQLException {
-        Connection conn = databaseManager.getConnection();
+    private void importColumns(Table table) throws SQLException {
+        Connection conn = databaseManager.getConnection(table.getSchemaName());
         try {
             PreparedStatement preparedStatement = conn.prepareStatement("SHOW COLUMNS FROM " + table.getName());
             ResultSet rs = preparedStatement.executeQuery();
 
-            ArrayList<Column> columns = new ArrayList<>();
             while (rs.next()) {
                 String columnName = rs.getString(1);
                 String columnType = rs.getString(2);
 
                 Column column = new Column(columnName, columnType);
-                columns.add(column);
                 table.addColumn(column);
                 System.out.println(columnName + " - " + columnType);
             }
             conn.close();
-            return columns;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             conn.close();
-            throw new RuntimeException(e);
         }
     }
+
+
 }

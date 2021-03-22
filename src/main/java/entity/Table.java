@@ -5,14 +5,12 @@ import java.util.ArrayList;
 public class Table {
     private String name;
     private ArrayList<Column> columns;
+    String schemaName;
 
-    public Table(String name) {
+    public Table(String name, String schemaName) {
         this.name = name;
         this.columns = new ArrayList<>();
-    }
-
-    public String getName() {
-        return name;
+        this.schemaName = schemaName;
     }
 
     public ArrayList<Column> getColumns() {
@@ -21,5 +19,13 @@ public class Table {
 
     public void addColumn(Column column) {
         columns.add(column);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSchemaName() {
+        return schemaName;
     }
 }
