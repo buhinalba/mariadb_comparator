@@ -1,23 +1,25 @@
 package jdbc;
 
+import org.mariadb.jdbc.MariaDbDataSource;
+
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseManager {
 
-    public Connection getConnection() {
+    public Connection getConnection(String dbName) {
         try {
             String root = System.getenv("MARIADB_USERNAME");
             String pw = System.getenv("MARIADB_PASSWORD");
-            String database = System.getenv("MARIADB_DATABASE_NAME");
+            // String database = System.getenv("MARIADB_DATABASE_NAME");
             String host = System.getenv("MARIADB_HOST");
-
-            if (root==null || pw==null || database==null || host==null) {
+            if (root==null || pw==null || dbName ==null || host==null) {
                 throw new RuntimeException("Missing Environment variables, can't connect to database!");
             }
 
-            String url = String.format("jdbc:mariadb://%s/%s", host, database);
+            String url = String.format("jdbc:mariadb://%s/%s", host, dbName);
             return DriverManager.getConnection(url, "root", "root");
         } catch (SQLException e) {
             System.out.println("Error while Connecting to database: " + e.getMessage());
@@ -27,4 +29,7 @@ public class DatabaseManager {
             throw new RuntimeException(e);
         }
     }
+
+
+
 }

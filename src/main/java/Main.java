@@ -1,8 +1,12 @@
 import jdbc.DatabaseManager;
+import jdbc.MariaDbReader;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello World");
+        DatabaseManager dbManager = new DatabaseManager();
+        App app = new App("dwh", "dwh_new", new MariaDbReader(dbManager));
+        app.importSchemas();
+        app.compareSchemas();
     }
 }
 
