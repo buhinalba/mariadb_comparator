@@ -6,6 +6,7 @@ import jdbc.DatabaseReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class App {
     private final Schema schema1;
@@ -21,11 +22,8 @@ public class App {
 
     public void compareSchemas() {
         // thought: factor methods out to SchemaComparator class ?
-        checkForDeletedTables();
+        checkForDeletedOrAlteredTables();
         checkForNewTables();
-        checkForDeletedColumns();
-        checkForNewColumns();
-        checkForDeletedColumns();
     }
 
 
@@ -52,14 +50,18 @@ public class App {
     }
 
 
-    private void checkForDeletedTables() {
+    private void checkForDeletedOrAlteredTables() {
         deletedTables = new ArrayList<>();
         commonTables = new ArrayList<>();
 
         for (Table table: schema1.getTables()) {
-            if (schema2.getTable(table.getName()).isEmpty()) {
+            Optional<Table> schema2Table = schema2.getTable(table.getName());
+            if (schema2Table.isEmpty()) {
                 deletedTables.add(table);
             } else {
+                checkForDeletedColumns(table, schema2Table.get());
+                checkForNewColumns(table, schema2Table.get());
+                checkForAlteredColumns(table, schema2Table.get());
                 commonTables.add(table);
             }
         }
@@ -76,17 +78,17 @@ public class App {
     }
 
 
-    private void checkForDeletedColumns() {
+    private void checkForDeletedColumns(Table oldTable, Table newTable) {
+        deletedColumns = new ArrayList<>();
+    }
+
+
+    private void checkForNewColumns(Table oldTable, Table newTable) {
         // todo go through commonTables
     }
 
 
-    private void checkForNewColumns() {
-        // todo go through commonTables
-    }
-
-
-    private void checkForAlteredColumns() {
+    private void checkForAlteredColumns(Table oldTable, Table newTable) {
         // todo go through commonTables
     }
 }
