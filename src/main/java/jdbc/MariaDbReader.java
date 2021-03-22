@@ -56,7 +56,7 @@ public class MariaDbReader implements DatabaseReader {
                 String columnName = rs.getString(1);
                 String columnType = rs.getString(2);
 
-                Column column = new Column(columnName, columnType);
+                Column column = new Column(columnName, columnType, table.getName());
                 table.addColumn(column);
                 System.out.println(columnName + " - " + columnType);
             }

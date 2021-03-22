@@ -1,10 +1,11 @@
 package entity;
 
 public class Column {
+    private String tableName;
     private String name;
     private String type;
 
-    public Column(String name, String type) {
+    public Column(String name, String type, String table) {
         this.name = name;
         this.type = type;
     }
@@ -15,5 +16,15 @@ public class Column {
 
     public String getType() {
         return type;
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+
+    @Override
+    public String toString() {
+        return String.format("%s.%s %s", tableName, name, type);
     }
 }

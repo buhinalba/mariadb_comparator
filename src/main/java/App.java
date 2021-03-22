@@ -3,6 +3,7 @@ import entity.Schema;
 import entity.Table;
 import jdbc.DatabaseReader;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.*;
 
 public class App {
@@ -13,9 +14,9 @@ public class App {
     private List<Table> deletedTables;
     private List<Table> newTables;
     private List<Table> commonTables;
-    private List<Column> deletedColumns;
-    private List<Column> newColumns;
-    private HashMap<Column, Column> alteredColumns;
+    private List<Column> deletedColumns = new ArrayList<>();
+    private List<Column> newColumns = new ArrayList<>();
+    private HashMap<Column, Column> alteredColumns = new HashMap<>();
 
     public void compareSchemas() {
         // thought: factor methods out to SchemaComparator class ?
@@ -42,8 +43,38 @@ public class App {
     }
 
 
-    private void printResult() {
-        // todo format and print differences
+    public void printResult() {
+        System.out.println();
+        System.out.println("----- DELETED TABLES ("+deletedTables.size()+")");
+        for (Table table: deletedTables) {
+            System.out.println(table.getName());
+        }
+
+        System.out.println();
+        System.out.println("----- NEW TABLES ("+newTables.size()+")");
+        for (Table table: newTables) {
+            System.out.println(table.getName());
+        }
+
+        System.out.println();
+        System.out.println("----- DELETED COLUMNS ("+deletedColumns.size()+")");
+        for (Column column: deletedColumns) {
+            System.out.println(column.getTableName()+"."+column.getName());
+        }
+
+        System.out.println();
+        System.out.println("----- NEW COLUMNS ("+newColumns.size()+")");
+        for (Column column: newColumns) {
+            System.out.println(column.getTableName()+"."+column.getName());
+        }
+
+        System.out.println();
+        System.out.println("----- ALTERED COLUMNS ("+alteredColumns.size()+")");
+        for (Map.Entry<Column, Column> alteration : alteredColumns.entrySet()) {
+            System.out.printf("%s --> %s%n", alteration.getKey().toString(), alteration.getValue().toString());
+        }
+
+
     }
 
 

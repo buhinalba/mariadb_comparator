@@ -7,6 +7,7 @@ public class Main {
         App app = new App("dwh", "dwh_new", new MariaDbReader(dbManager));
         app.importSchemas();
         app.compareSchemas();
+        app.printResult();
     }
 }
 
