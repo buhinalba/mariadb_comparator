@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DatabaseManager {
 
-    public static Connection getConnection() {
+    public Connection getConnection() {
         try {
             String root = System.getenv("MARIADB_USERNAME");
             String pw = System.getenv("MARIADB_PASSWORD");
