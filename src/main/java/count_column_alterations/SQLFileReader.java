@@ -7,17 +7,16 @@ public class SQLFileReader {
     ArrayList<String> alteredColumns;
 
 
-    public ArrayList<String> getAlteredColumns(File file) {
+    public ArrayList<String> readAlteredColumns(File file) {
+        System.out.println(file.getAbsolutePath());
         // todo read through lines
         return null;
     }
 
-
-    public SQLFileReader(ArrayList<String> alteredColumns) {
-        this.alteredColumns = alteredColumns;
+    public SQLFileReader() {
     }
 
-
-    public SQLFileReader() {
+    public ArrayList<String> getAlteredColumns() {
+        return alteredColumns;
     }
 }
