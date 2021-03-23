@@ -18,7 +18,7 @@ public class MariaDbReader implements DatabaseReader {
     }
 
     @Override
-    public boolean importTables(Schema schema) {
+    public void importTables(Schema schema) {
         try {
             Connection conn = databaseManager.getConnection(schema.getName());
             String query = "SELECT table_name FROM information_schema.tables WHERE table_type = 'base table' AND table_schema=?";
@@ -29,7 +29,6 @@ public class MariaDbReader implements DatabaseReader {
 
             ArrayList<Table> tables = new ArrayList<>();
             while (rs.next()) {
-                System.out.println(rs.getString(1));
                 tables.add(new Table(rs.getString(1), schema.getName()));
             }
             conn.close();
@@ -37,11 +36,9 @@ public class MariaDbReader implements DatabaseReader {
                 importColumns(table);
             }
             schema.setTables(tables);
-
-            return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return false;
+            throw new RuntimeException(e);
         }
     }
 
@@ -58,7 +55,6 @@ public class MariaDbReader implements DatabaseReader {
 
                 Column column = new Column(columnName, columnType, table.getName());
                 table.addColumn(column);
-                System.out.println(columnName + " - " + columnType);
             }
             conn.close();
         } catch (SQLException e) {
