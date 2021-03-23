@@ -1,8 +1,8 @@
-package jdbc;
+package compare_databases.jdbc;
 
-import entity.Column;
-import entity.Schema;
-import entity.Table;
+import compare_databases.entity.Column;
+import compare_databases.entity.Schema;
+import compare_databases.entity.Table;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

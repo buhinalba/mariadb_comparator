@@ -1,6 +1,8 @@
-import entity.Column;
-import entity.Schema;
-import entity.Table;
+package compare_databases;
+
+import compare_databases.entity.Column;
+import compare_databases.entity.Schema;
+import compare_databases.entity.Table;
 
 import java.util.ArrayList;
 import java.util.HashMap;

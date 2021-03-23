@@ -1,5 +1,7 @@
-import jdbc.DatabaseManager;
-import jdbc.MariaDbReader;
+package compare_databases;
+
+import compare_databases.jdbc.DatabaseManager;
+import compare_databases.jdbc.MariaDbReader;
 
 public class Main {
     public static void main(String[] args) {

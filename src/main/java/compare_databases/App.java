@@ -1,7 +1,9 @@
-import entity.Column;
-import entity.Schema;
-import entity.Table;
-import jdbc.DatabaseReader;
+package compare_databases;
+
+import compare_databases.entity.Column;
+import compare_databases.entity.Schema;
+import compare_databases.entity.Table;
+import compare_databases.jdbc.DatabaseReader;
 import java.util.*;
 
 

@@ -1,4 +1,4 @@
-package entity;
+package compare_databases.entity;
 
 import java.util.ArrayList;
 import java.util.Optional;

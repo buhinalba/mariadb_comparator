@@ -1,4 +1,4 @@
-package jdbc;
+package compare_databases.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

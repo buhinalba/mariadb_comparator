@@ -1,4 +1,4 @@
-package entity;
+package compare_databases.entity;
 
 public class Column {
     private String tableName;
