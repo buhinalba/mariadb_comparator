@@ -1,7 +1,7 @@
 # Data Engineer Assignment
 Collection of assignments for GE Healthcare's data engineering position.
 
-The repo consists of 4 parts, each on a different branch, to prevent confusion (Description in hungarian):
+The repo consists of 4 parts, each in a different package. (Description in hungarian):
   1. Egy olyan programot szeretnék Java-ban, ami összehasonlítja két MariaDB schema (náluk ezt database-nak is hívják) tábláit. Nevezzük az egyiket réginek, a másikat pedig újnak. Megmondja hogy melyik tábla az, ami törölve lett, melyik változott és hogyan (elég csak az oszlopokban bekövetkezett változást figyelni, de ha az oszlop adattípusa változott azt is szeretnénk látni nem csak az új vagy törölt oszlopokat) illetve melyik, ami újonnan lett létrehozva.
   2. Szeretnék egy olyan programot akár Java akár Python, ami végignézi egy adott könyvtár és alkönyvtárjai összes '.sql' kiterjesztésű file-ját. Ezek a file-ok mindenféle MariaDB SQL DDL parancsokat tárolnak. Van ami csak egyet, van ami viszont rengeteget. Minden parancs új sorban kezdődik és igaz minden ALTER prancsra, hogy egy parancs csak egy változást hajt végre. A program célja, hogy gyűjtse össze az összes megváltoztatott oszlop nevét tábla.oszlop formátumban. Azokra az oszlopokra viszont nem vagyunk kíváncsiak, amik olyan táblákban vannak, melyek nevében benne van a 'dwXX' sztring (az XX két számjegyet jelent)
   3. A mellékelt három MariaDB (az általam használt MariaDB verziója 10.4.12) tábla felhasználásával a következő kérdésekre szeretnék választ kapni:
