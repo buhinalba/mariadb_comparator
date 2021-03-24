@@ -10,6 +10,7 @@ public class SQLFileReader {
     public ArrayList<String> readAlteredColumns(File file) {
         System.out.println(file.getAbsolutePath());
         // todo read through lines
+        // -> check for ALTER COLUMN
         return null;
     }
 
