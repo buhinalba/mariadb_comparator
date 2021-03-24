@@ -6,5 +6,6 @@ public class Main {
 
         DirectoryTraverser directoryTraverser = new DirectoryTraverser("/home/buhinalba/Projects/Data_engineer_assignment/src");
         directoryTraverser.traverse();
+        directoryTraverser.printResult();
     }
 }

@@ -16,7 +16,11 @@ public class DirectoryTraverser {
 
     }
 
-
+    /**
+     * traverses directory and its subdirectories looking for .sql files,
+     * and looks for column alterations in them
+     * @throws Exception for example if the path String is malformed, or non existent.
+     */
     public void traverse() throws Exception {
         Path dir = Paths.get(DIRECTORY_PATH);
         Files.walk(dir).forEach(path -> {
