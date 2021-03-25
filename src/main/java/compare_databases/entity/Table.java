@@ -33,4 +33,9 @@ public class Table {
     public Optional<Column> getColumn(String name) {
         return columns.stream().filter(column -> column.getName().equals(name)).findFirst();
     }
+
+    @Override
+    public String toString() {
+        return schemaName + "." + name;
+    }
 }

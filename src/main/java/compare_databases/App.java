@@ -20,7 +20,7 @@ public class App {
     public void importSchemas() {
         dbReader.importTables(schemaComparator.getSchema1());
         dbReader.importTables(schemaComparator.getSchema2());
-        System.out.println("Schemas Imported"); // todo create view/output class for handling communication with user
+        OutWriter.message("Schemas Imported");
     }
 
 
@@ -31,37 +31,25 @@ public class App {
 
 
     public void printResult() {
-        System.out.println();
-        System.out.println("----- DELETED TABLES ("+schemaComparator.getDeletedTables().size()+")");
-        for (Table table: schemaComparator.getDeletedTables()) {
-            System.out.println(table.getName());
-        }
+        OutWriter.message("\n");
+        OutWriter.message("----- DELETED TABLES ("+schemaComparator.getDeletedTables().size()+")");
+        OutWriter.printList(schemaComparator.getDeletedTables());
 
-        System.out.println();
-        System.out.println("----- NEW TABLES ("+schemaComparator.getNewTables().size()+")");
-        for (Table table: schemaComparator.getNewTables()) {
-            System.out.println(table.getName());
-        }
+        OutWriter.message("\n");
+        OutWriter.message("----- NEW TABLES ("+schemaComparator.getNewTables().size()+")");
+        OutWriter.printList(schemaComparator.getNewTables());
 
-        System.out.println();
-        System.out.println("----- DELETED COLUMNS ("+schemaComparator.getDeletedColumns().size()+")");
-        for (Column column: schemaComparator.getDeletedColumns()) {
-            System.out.println(column.getTableName()+"."+column.getName());
-        }
+        OutWriter.message("\n");
+        OutWriter.message("----- DELETED COLUMNS ("+schemaComparator.getDeletedColumns().size()+")");
+        OutWriter.printList(schemaComparator.getDeletedColumns());
 
-        System.out.println();
+        OutWriter.message("\n");
         System.out.println("----- NEW COLUMNS ("+schemaComparator.getNewColumns().size()+")");
-        for (Column column: schemaComparator.getNewColumns()) {
-            System.out.println(column.getTableName()+"."+column.getName());
-        }
+        OutWriter.printList(schemaComparator.getNewColumns());
 
-        System.out.println();
+        OutWriter.message("\n");
         System.out.println("----- ALTERED COLUMNS ("+schemaComparator.getAlteredColumns().size()+")");
-        for (Map.Entry<Column, Column> alteration : schemaComparator.getAlteredColumns().entrySet()) {
-            System.out.printf("%s --> %s%n", alteration.getKey().toString(), alteration.getValue().toString());
-        }
-
-
+        OutWriter.printHashMap(schemaComparator.getAlteredColumns());
     }
 
 }
