@@ -7,6 +7,7 @@ SELECT dwh.device.*, count(*) "series_count"
     ORDER BY count(*) DESC
     LIMIT 1 OFFSET 4;
 
+
 -- Melyik volt a legzsúfoltabb nap, azaz melyik nap történt a legtöbb felvétel?
 SELECT study.study_datetime, count(*) "series_count"
     FROM dwh.device
@@ -36,3 +37,5 @@ LIMIT 1;
 
 -- Mit változtatnál a táblákon a gyorsabb végrehajtás érdekében?
 -- 1. Minden tábla id-ját megjelölném PRIMARY KEY-nek, ezzel automatikusan kreálódna egy index az id alapján, így például a joinok is sokkal gyorsabbak lennének
+-- 2. Esetleg megnézném még milyen oszlopok vannak használva a GROUP BY/ORDER BY/WHERE kikötésekben és ha több helyen is
+-- használva van akkor raknék rájuk indexet, de ha nem akkor hagynám, attól függően mennyi a már létező index.
