@@ -13,21 +13,6 @@ A mellékelt három MariaDB (az általam használt MariaDB verziója 10.4.12) t�
   - Mennyi volt az átlagos képkészítési idő (series_duration) képtípusonként (series_type)
   - Melyik adattípusnak (data_type) a legmagasabb a diagnosztikai eredményessége (legnagyobb arányú a diagnostic=Y értéke)
   A táblák közötti kapcsolat study.id = serie.study_key illetve a study.ae_key = device.id. A study tábla vizsgálati adatokat tartalmaz. A serie tábla az adott vizsgálat során elvégzett CT felvételek adatait, a device tábla pedig a felvételeket végző gépek adatait.  A választ megadó sql query-re lennék kíváncsi. Arra is kíváncsi lennék hogy mit változtatnál a táblákon a gyorsabb végrehajtás érdekében.
-  4. Extra feladat tárolt eljárással MariaDB-ben.
- ``` sql
-
-CREATE TABLE `scheduled_patient` (
-
-`id` bigint(20) NOT null auto_increment,
-
-`first_name` varchar(255) DEFAULT NULL,
-
-`last_name` varchar(255) DEFAULT NULL,
-
-`exam_datetime` datetime,
-
-PRIMARY KEY (`id`)
-
-);
-```
-  Ebbe a paciens nyilvántartó táblába szeretnék beszúrni véletlenszerű vezeték és keresztnév adatot. Az első vizsgálat minden nap reggel 7-kor van, az utolsó pedig és este 8-kor. Óránként véletlenszerűen 0-4 pácienst szeretnék beilleszteni egyenletesen elosztva, azaz ha egy ember jön akkor ő HH:00-ra, ha kettő akkor az első HH:00, a második HH:30, ha három akkor HH:00,HH:20,HH:40 és így tovább. A következő x napra szeretnék adatot, az x bemenő paramétere a tárolt eljárásnak.
+  4. https://github.com/buhinalba/Data_engineer_assignment/blob/main/src/main/data/create_client_appointments.sql  
+Extra feladat tárolt eljárással MariaDB-ben.
+  A paciens nyilvántartó táblába szeretnék beszúrni véletlenszerű vezeték és keresztnév adatot. Az első vizsgálat minden nap reggel 7-kor van, az utolsó pedig és este 8-kor. Óránként véletlenszerűen 0-4 pácienst szeretnék beilleszteni egyenletesen elosztva, azaz ha egy ember jön akkor ő HH:00-ra, ha kettő akkor az első HH:00, a második HH:30, ha három akkor HH:00,HH:20,HH:40 és így tovább. A következő x napra szeretnék adatot, az x bemenő paramétere a tárolt eljárásnak.
